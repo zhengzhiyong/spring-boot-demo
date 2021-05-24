@@ -4,22 +4,28 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
+/**
+ * @author laobiao
+ * @date 2021年5月24日 16点23分
+ * @desc 文件压缩
+ */
 public final class FilesUtils {
     /**
-     * @param directoryPaths   文件夹目录集合
-     * @param zipFilePath      压缩后文件地址
-     * @param keepDirStructure 是否保持原来文件的目录结构(ture：是，false:否)
+     * @param compressFileDirectories 文件夹目录和文件地址目录
+     * @param zipFilePath             压缩后文件地址
+     * @param keepDirStructure        是否保持原来文件的目录结构(ture：是，false:否)
      * @return
      * @throws IOException
      */
-    public static boolean compressDirectories(List<String> directoryPaths, String zipFilePath, boolean keepDirStructure) throws IOException {
-        if (CollectionUtils.isEmpty(directoryPaths)) {
+    public static boolean compressFiles2Zip(List<String> compressFileDirectories, String zipFilePath, boolean keepDirStructure) throws IOException {
+        if (CollectionUtils.isEmpty(compressFileDirectories)) {
             return false;
         }
         if (StringUtils.isEmpty(zipFilePath)) {
@@ -31,49 +37,50 @@ public final class FilesUtils {
         }
         byte[] buf = new byte[1024];
         ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipFile));
-        for (int i = 0; i < directoryPaths.size(); i++) {
-            File directory = new File(directoryPaths.get(i));
-            if (!directory.exists() || !directory.isDirectory()) {
-                continue;
-            }
-            File[] files = directory.listFiles();
-            for (int n = 0; n < files.length; n++) {
-                compressFile(keepDirStructure, buf, zos, files[n]);
-            }
-        }
+        compressFileOrDirectory(compressFileDirectories, keepDirStructure, buf, zos);
         zos.close();
         return true;
     }
-
 
     /**
-     * @param filePaths        文件目录集合
-     * @param zipFilePath      压缩后文件地址
-     * @param keepDirStructure 是否保持原来文件的目录结构(ture：是，false:否)
-     * @return
+     * 循环处理文件夹或文件
+     *
+     * @param compressFileDirectories
+     * @param keepDirStructure
+     * @param buf
+     * @param zos
      * @throws IOException
      */
-    public static boolean compressFiles(List<String> filePaths, String zipFilePath, boolean keepDirStructure) throws IOException {
-        if (CollectionUtils.isEmpty(filePaths)) {
-            return false;
+    private static void compressFileOrDirectory(List<String> compressFileDirectories, boolean keepDirStructure, byte[] buf, ZipOutputStream zos) throws IOException {
+        for (int i = 0; i < compressFileDirectories.size(); i++) {
+            String fileOrDirectoryPath = compressFileDirectories.get(i);
+            //判断路径为文件或文件夹
+            File fileDirectory = new File(fileOrDirectoryPath);
+            if (!fileDirectory.exists()) {
+                continue;
+            }
+            if (!fileDirectory.isDirectory()) {
+                compressFile(keepDirStructure, buf, zos, fileDirectory);
+                continue;
+            }
+            File[] files = fileDirectory.listFiles();
+            if (null == files || files.length == 0) {
+                continue;
+            }
+            List<String> filePaths = Arrays.stream(files).map(File::getAbsolutePath).collect(Collectors.toList());
+            compressFileOrDirectory(filePaths, keepDirStructure, buf, zos);
         }
-        if (StringUtils.isEmpty(zipFilePath)) {
-            return false;
-        }
-        File zipFile = new File(zipFilePath);
-        if (!zipFile.exists()) {
-            zipFile.createNewFile();
-        }
-        byte[] buf = new byte[1024];
-        ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipFile));
-        for (int i = 0; i < filePaths.size(); i++) {
-            File file = new File(filePaths.get(i));
-            compressFile(keepDirStructure, buf, zos, file);
-        }
-        zos.close();
-        return true;
     }
 
+    /**
+     * 压缩单个文件
+     *
+     * @param keepDirStructure
+     * @param buf
+     * @param zos
+     * @param file
+     * @throws IOException
+     */
     private static void compressFile(boolean keepDirStructure, byte[] buf, ZipOutputStream zos, File file) throws IOException {
         if (!file.exists()) {
             return;
@@ -91,21 +98,22 @@ public final class FilesUtils {
 
     /**
      * 解压缩压缩文件
-     * @param zipFilePath 压缩文件目录位置
-     * @param outPutPath 解压缩后存放位置(keepDirStructure为true时不生效)
+     *
+     * @param zipFilePath      压缩文件目录位置
+     * @param outPutPath       解压缩后存放位置(keepDirStructure为true时不生效)
      * @param keepDirStructure 是否保持原来目录结构(ture：是，false:否)
      * @return
      * @throws IOException
      */
     public static boolean unZipFiles(String zipFilePath, String outPutPath, boolean keepDirStructure) throws IOException {
-        if (StringUtils.isEmpty(zipFilePath)){
+        if (StringUtils.isEmpty(zipFilePath)) {
             return false;
         }
         File zipFile = new File(zipFilePath);
-        if (!zipFile.exists()){
+        if (!zipFile.exists()) {
             return false;
         }
-        if (StringUtils.isEmpty(outPutPath)){
+        if (StringUtils.isEmpty(outPutPath)) {
             return false;
         }
         //读取压缩文件
@@ -133,15 +141,5 @@ public final class FilesUtils {
             }
         }
         return true;
-    }
-
-    /**
-     * zip压缩文 解压
-     */
-    public static void main(String[] args) throws IOException {
-        List<String> directoryPaths = new ArrayList<>();
-        directoryPaths.add("D:\\工作\\证件照\\af34014a423011e9b6b900163e009f5548807white");
-        String zipFilePath = "D:\\工作\\compressDirectoriesTest.zip";
-        FilesUtils.compressDirectories(directoryPaths, zipFilePath, false);
     }
 }

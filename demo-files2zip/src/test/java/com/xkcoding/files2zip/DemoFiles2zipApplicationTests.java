@@ -22,7 +22,7 @@ public class DemoFiles2zipApplicationTests {
         List<String> directoryPaths = new ArrayList<>();
         directoryPaths.add("D:\\工作\\test");
         String zipFilePath = "D:\\工作\\compressDirectoriesTest.zip";
-        FilesUtils.compressDirectories(directoryPaths, zipFilePath, false);
+        FilesUtils.compressFiles2Zip(directoryPaths, zipFilePath, false);
     }
 
     @Test
@@ -31,6 +31,15 @@ public class DemoFiles2zipApplicationTests {
         filePaths.add("D:\\工作\\教程\\FreeMarker\\FreeMarker教程-熊狮虎.pdf");
         filePaths.add("D:\\工作\\面试准备\\jvm相关知识.docx");
         String zipFilePath = "D:\\工作\\compressFilesTest.zip";
-        FilesUtils.compressFiles(filePaths, zipFilePath, false);
+        FilesUtils.compressFiles2Zip(filePaths, zipFilePath, false);
     }
+
+    @Test
+    public void compressFiles2ZipTest() throws IOException {
+        List<String> filePaths = new ArrayList<>();
+        filePaths.add("D:\\file test");
+        String zipFilePath = "D:\\compressFilesTest01.zip";
+        FilesUtils.compressFiles2Zip(filePaths, zipFilePath, true);
+    }
+
 }
