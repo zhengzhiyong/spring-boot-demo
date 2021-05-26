@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master master-name="simpleA4"
+                           page-height="1001px"
+                           page-width="665px">
+      <fo:region-body/>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+
+  <fo:page-sequence master-reference="simpleA4">
+
+    <fo:flow flow-name="xsl-region-body">
+
+      <!-- 姓名 -->
+      <fo:block-container top="100px" position="absolute">
+        <fo:block color="#FF6A00" margin-left="60px" margin-right="60px" margin-top="10px" margin-bottom="30px" font-size="38px" font-weight="bold"  font-family="STKAITI" >${name}</fo:block>
+      </fo:block-container>
+
+      <fo:block-container top="180px" position="absolute">
+        <fo:block margin-left="60px" font-size="28px" font-family="STKAITI" >
+          感谢你自2019年8月开始，
+        </fo:block>
+      </fo:block-container>
+
+      <fo:block-container top="235px" position="absolute" width="480px">
+        <fo:block margin-left="60px" font-size="28px" font-family="STKAITI" >
+          通过公益宝贝支持的9999999个公益项目
+          已通过公益区块链存证并追溯，
+        </fo:block>
+      </fo:block-container>
+
+      <fo:block-container top="320px" position="absolute" width="450px">
+        <fo:block margin-left="60px" font-size="28px" font-family="STKAITI" >
+          你购买的999999笔订单，共带动商家
+          捐赠了9999999元，
+        </fo:block>
+      </fo:block-container>
+
+      <fo:block-container top="405px" position="absolute">
+        <fo:block margin-left="60px" font-size="28px" font-family="STKAITI" >
+          为99999人带去了爱和希望
+        </fo:block>
+      </fo:block-container>
+
+      <fo:block-container top="490px" position="absolute">
+        <fo:block margin-left="80px" font-size="28px" color="#FF6A00" font-weight="bold" font-family="STKAITI" >
+          以上贡献，已通过区块链存证并追溯
+        </fo:block>
+      </fo:block-container>
+
+      <fo:block-container top="646px" position="absolute">
+        <fo:block margin-left="275px" font-size="28px" font-family="STKAITI" >
+          链上公益
+        </fo:block>
+      </fo:block-container>
+
+      <fo:block-container top="723px" position="absolute">
+        <fo:block margin-left="275px" font-size="28px" font-family="STKAITI" >
+          一分都不能少
+        </fo:block>
+      </fo:block-container>
+
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<fop version="1.0">
+  <base>.</base>
+  <source-resolution>100</source-resolution>
+  <target-resolution>100</target-resolution>
+  <default-page-settings height="297cm" width="210cm"/>
+
+  <renderers>
+    <renderer mime="application/pdf">
+      <filterList>
+        <value>flate</value>
+      </filterList>
+      <fonts>
+        <!--        <font metrics-url="classpath:/res/fonts/Alibaba-PuHuiTi-Regular.xml" kerning="yes"-->
+        <!--              embed-url="classpath:/res/fonts/Alibaba-PuHuiTi-Regular.ttf">-->
+        <font kerning="yes"
+              embed-url="classpath:/res/fonts/STKAITI.ttf">
+          <font-triplet name="STKAITI" style="normal" weight="normal"/>
+        </font>
+      </fonts>
+    </renderer>
+
+    <renderer mime="image/png">
+      <!--transparent-page-background>true</transparent-page-background-->
+      <filterList>
+        <value>flate</value>
+      </filterList>
+      <fonts>
+        <!--        <font metrics-url="classpath:/res/fonts/Alibaba-PuHuiTi-Regular.xml" kerning="yes"-->
+        <!--              embed-url="classpath:/res/fonts/Alibaba-PuHuiTi-Regular.ttf">-->
+        <font kerning="yes"
+              embed-url="classpath:/res/fonts/STKAITI.ttf">
+          <font-triplet name="STKAITI" style="normal" weight="normal"/>
+        </font>
+      </fonts>
+    </renderer>
+  </renderers>
+</fop>

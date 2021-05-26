@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master master-name="simpleA4"
+                           page-height="892px"
+                           page-width="640px">
+      <fo:region-body/>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+
+  <fo:page-sequence master-reference="simpleA4">
+
+    <fo:flow flow-name="xsl-region-body">
+
+      <!-- 背景图 -->
+      <fo:block-container width="640px" height="892px" position="absolute">
+        <fo:block>
+          <fo:external-graphic content-height="892px" content-width="640px"
+                               src="classpath:/res/fop/fo/demo/image/yuanlao.jpg">
+          </fo:external-graphic>
+        </fo:block>
+      </fo:block-container>
+
+      <fo:block-container top="100px" position="absolute">
+        <fo:block color="#FF6A00" margin-left="200px" margin-top="10px" margin-bottom="30px"
+                  font-size="100px" font-weight="bold" font-family="STKAITI">致敬袁老
+        </fo:block>
+      </fo:block-container>
+
+      <fo:block-container top="520px" position="absolute">
+        <fo:block color="#FF6A00" margin-left="60px" font-size="28px" font-weight="bold"  font-family="STKAITI">
+          首届国家最高科学技术奖得主、杂交水稻之父
+        </fo:block>
+      </fo:block-container>
+
+      <fo:block-container top="580px" position="absolute" width="1000px">
+        <fo:block color="#FF6A00" margin-left="200px" font-size="100px" font-family="STKAITI">
+          节约粮食
+        </fo:block>
+      </fo:block-container>
+
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>
