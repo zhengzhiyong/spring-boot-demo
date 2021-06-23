@@ -71,6 +71,8 @@
     <module>demo-files2zip</module>
     <module>demo-flyway</module>
     <module>demo-pay</module>
+    <module>demo-fop</module>
+    <module>demo-easy-excel</module>
   </modules>
   <packaging>pom</packaging>
 
