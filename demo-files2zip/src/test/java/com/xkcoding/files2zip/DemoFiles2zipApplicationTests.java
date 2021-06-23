@@ -1,6 +1,7 @@
 package com.xkcoding.files2zip;
 
 
+import cn.hutool.core.util.ZipUtil;
 import com.xkcoding.files2zip.util.FilesUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,4 +43,13 @@ public class DemoFiles2zipApplicationTests {
         FilesUtils.compressFiles2Zip(filePaths, zipFilePath, true);
     }
 
+
+    @Test
+    public void compressFiles(){
+//        String zipFilePath = "D:\\compressFilesTest01.zip";
+//        ZipUtil.zip("D:\\file test",zipFilePath,true);
+
+        String zipFilePath = "D:\\工作\\compressFilesTest.zip";
+        ZipUtil.zip("D:\\工作\\教程\\FreeMarker\\FreeMarker教程-熊狮虎.pdf", zipFilePath, true);
+    }
 }
