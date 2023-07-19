@@ -73,6 +73,7 @@
     <module>demo-pay</module>
     <module>demo-fop</module>
     <module>demo-easy-excel</module>
+    <module>demo-mockito</module>
   </modules>
   <packaging>pom</packaging>
 
