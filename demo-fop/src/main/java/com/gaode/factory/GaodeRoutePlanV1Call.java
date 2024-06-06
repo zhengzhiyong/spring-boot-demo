@@ -7,11 +7,10 @@ import java.util.Map;
 
 @Order(2)
 @Component
-public class GaodeV1RoutePlanCall extends AbstractGaodeFactory{
+public class GaodeRoutePlanCall extends AbstractGaodeRouteHandler<Map<String, Object>,RoutePathRequest,GaodeApiResult,GaodeResult> {
 
     @Override
-    protected Map<String, Object> checkParams(Map<String, Object> params) {
-        return params;
+    protected void checkParams(Map<String, Object> params) {
     }
 
     @Override
@@ -35,7 +34,7 @@ public class GaodeV1RoutePlanCall extends AbstractGaodeFactory{
     }
 
     @Override
-    protected GaodeApiResult callGaodeApi(RoutePathRequest request) {
+    protected GaodeApiResult apiCall(RoutePathRequest request) {
         return new GaodeApiResult();
     }
 
