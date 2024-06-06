@@ -1,6 +1,6 @@
 package com.gaode.controller;
 
-import com.gaode.handler.GaodeHandler;
+import com.gaode.handler.GaodeManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,11 +10,11 @@ import javax.annotation.Resource;
 public class GaodeController {
 
  @Resource
- private GaodeHandler gaodeHandler;
+ private GaodeManager gaodeManager;
 
   @GetMapping("/demo")
   public String gaode(){
-    gaodeHandler.doAction();
+    gaodeManager.doAction();
     return "success!";
   }
 }
