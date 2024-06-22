@@ -74,6 +74,7 @@
     <module>demo-fop</module>
     <module>demo-easy-excel</module>
     <module>demo-mockito</module>
+    <module>demo-liteflow</module>
   </modules>
   <packaging>pom</packaging>
 
