@@ -75,6 +75,7 @@
     <module>demo-easy-excel</module>
     <module>demo-mockito</module>
     <module>demo-liteflow</module>
+    <module>demo-nacos-common</module>
   </modules>
   <packaging>pom</packaging>
 
